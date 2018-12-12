@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:35 LKT) -->
+<serviceGroup>
+    <service name="WSQueriesService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.ign4ci0.spring.boot.web.service.axis2.generated.WSQueriesServiceMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.ign4ci0.spring.boot.web.service.axis2.WSQueriesDispatcher</parameter>
+        <parameter name="useOriginalwsdl">false</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="getInformation" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://localhost:3337/ws-server/services/WSQueries">
+            <actionMapping>http://localhost:3337/ws-server/services/WSQueriesService/getInformationRequest</actionMapping>
+            <outputActionMapping>http://localhost:3337/ws-server/services/WSQueriesService/getInformationResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="ws-server"
+    xmlns:apachesoap="http://xml.apache.org/xml-soap"
+    xmlns:impl="ws-server" xmlns:intf="ws-server"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <schema targetNamespace="ws-server"
+            xmlns="http://www.w3.org/2001/XMLSchema">
+            <import schemaLocation="encoding.xsd"
+                namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+            <complexType name="ArrayOf_xsd_string">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType"
+                            wsdl:arrayType="xsd:string[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <xsd:element name="getInformationRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element form="unqualified"
+                            name="phoneNumber" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element
+                name="getInformationResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element form="unqualified"
+                            name="data"
+                            type="impl:ArrayOf_xsd_string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getInformationResponse">
+        <wsdl:part name="data" type="impl:ArrayOf_xsd_string" />
+    </wsdl:message>
+    <wsdl:message name="getInformationRequest">
+        <wsdl:part name="phoneNumber" type="xsd:string" />
+    </wsdl:message>
+    <wsdl:portType name="WSQueries">
+        <wsdl:operation name="getInformation"
+            parameterOrder="data">
+            <wsdl:input message="impl:getInformationRequest"
+                name="getInformationRequest" />
+            <wsdl:output
+                message="impl:getInformationResponse"
+                name="getInformationResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WSQueriesSoapBinding"
+        type="impl:WSQueries">
+        <wsdlsoap:binding style="rpc"
+            transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="getInformation">
+            <wsdlsoap:operation soapAction="" />
+            <wsdl:input name="getInformationRequest">
+                <wsdlsoap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="ws-server" use="encoded" />
+            </wsdl:input>
+            <wsdl:output name="getInformationResponse">
+                <wsdlsoap:body
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="ws-server" use="encoded" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WSQueriesService">
+        <wsdl:port binding="impl:WSQueriesSoapBinding"
+            name="WSQueries">
+            <wsdlsoap:address
+                location="http://localhost:8080/ws-server/services/WSQueries" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+
